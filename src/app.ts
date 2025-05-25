@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
+import apiRoutes from "./api/routes";
 
 // Initialize Express app
 const app = express();
@@ -6,6 +7,9 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Register API routes
+app.use(apiRoutes);
 
 // Basic health check endpoint
 app.get("/health", (_req: Request, res: Response) => {
