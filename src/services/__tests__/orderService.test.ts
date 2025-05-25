@@ -2,7 +2,6 @@ import { OrderService } from "../orderService";
 import { DiscountService } from "../discountService";
 import { ShippingService } from "../shippingService";
 import { WarehouseRepository } from "../../repositories/warehouseRepository";
-import { SHIPPING } from "../../config/constants";
 
 // Mocks
 jest.mock("../discountService");

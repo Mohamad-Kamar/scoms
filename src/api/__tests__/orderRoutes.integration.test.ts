@@ -102,5 +102,59 @@ describe("Order API Integration Tests", () => {
         "Shipping cost exceeds maximum percentage of order value",
       );
     });
+
+    it("should return 400 for invalid quantity", async () => {
+      const response = await request(app)
+        .post("/api/v1/orders/verify")
+        .send({
+          quantity: -5,
+          shippingAddress: {
+            latitude: 40.7128,
+            longitude: -74.006,
+          },
+        });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBeDefined();
+      expect(response.body.message).toContain(
+        "Quantity must be greater than 0",
+      );
+    });
+
+    it("should return 400 for invalid latitude", async () => {
+      const response = await request(app)
+        .post("/api/v1/orders/verify")
+        .send({
+          quantity: 10,
+          shippingAddress: {
+            latitude: 100, // Invalid latitude
+            longitude: -74.006,
+          },
+        });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBeDefined();
+      expect(response.body.message).toContain(
+        "Latitude must be between -90 and 90",
+      );
+    });
+
+    it("should return 400 for invalid longitude", async () => {
+      const response = await request(app)
+        .post("/api/v1/orders/verify")
+        .send({
+          quantity: 10,
+          shippingAddress: {
+            latitude: 40.7128,
+            longitude: -200, // Invalid longitude
+          },
+        });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBeDefined();
+      expect(response.body.message).toContain(
+        "Longitude must be between -180 and 180",
+      );
+    });
   });
 });

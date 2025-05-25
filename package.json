@@ -15,7 +15,10 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "clean": "rm -rf dist",
+    "test:watch": "jest --watch",
+    "start:prod": "NODE_ENV=production node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -24,9 +27,11 @@
     "@eslint/js": "^9.27.0",
     "@types/express": "^5.0.2",
     "@types/geolib": "^2.0.3",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.15.21",
-    "@types/supertest": "^6.0.2",
+    "@types/supertest": "^6.0.3",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "dotenv": "^16.5.0",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
@@ -34,18 +39,21 @@
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
     "supertest": "^6.3.4",
-    "ts-jest": "^29.1.2",
+    "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.32.1"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
-    "dotenv": "^16.5.0",
+    "@types/swagger-ui-express": "^4.1.8",
     "express": "^5.1.0",
     "geolib": "^3.3.4",
     "prisma": "^5.11.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "ulid": "^2.4.0",
     "zod": "^3.22.4"
-  }
+  },
+  "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
 }

@@ -27,20 +27,24 @@ export class OrderController {
     } catch (error) {
       if (error instanceof ZodError) {
         // Handle validation errors
+        const fieldErrors = error.flatten().fieldErrors;
+        const firstError =
+          Object.values(fieldErrors)[0]?.[0] || "Invalid request data";
         res.status(400).json({
           error: "Validation Error",
-          message: "Invalid request data",
-          details: error.flatten().fieldErrors,
+          message: firstError,
+          details: fieldErrors,
         });
-      } else {
+      } else if (error instanceof Error) {
         // Handle other errors
-        console.error("Error in verifyOrder:", error);
         res.status(500).json({
           error: "Internal Server Error",
-          message:
-            error instanceof Error
-              ? error.message
-              : "An unexpected error occurred",
+          message: error.message,
+        });
+      } else {
+        res.status(500).json({
+          error: "Unknown Error",
+          message: "An unknown error occurred",
         });
       }
     }
@@ -74,20 +78,24 @@ export class OrderController {
     } catch (error) {
       if (error instanceof ZodError) {
         // Handle validation errors
+        const fieldErrors = error.flatten().fieldErrors;
+        const firstError =
+          Object.values(fieldErrors)[0]?.[0] || "Invalid request data";
         res.status(400).json({
           error: "Validation Error",
-          message: "Invalid request data",
-          details: error.flatten().fieldErrors,
+          message: firstError,
+          details: fieldErrors,
         });
-      } else {
+      } else if (error instanceof Error) {
         // Handle other errors
-        console.error("Error in submitOrder:", error);
         res.status(500).json({
           error: "Internal Server Error",
-          message:
-            error instanceof Error
-              ? error.message
-              : "An unexpected error occurred",
+          message: error.message,
+        });
+      } else {
+        res.status(500).json({
+          error: "Unknown Error",
+          message: "An unknown error occurred",
         });
       }
     }
