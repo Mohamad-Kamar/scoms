@@ -74,7 +74,7 @@ export class OrderService {
     if (!sufficientStock) {
       invalidReason = "Insufficient stock across all warehouses";
     } else if (shippingCostExceedsLimit) {
-      invalidReason = `Shipping cost exceeds ${SHIPPING.MAX_COST_PERCENTAGE}% of the order value`;
+      invalidReason = "Shipping cost exceeds maximum percentage of order value";
     }
 
     return {
