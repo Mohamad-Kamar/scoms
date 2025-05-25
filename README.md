@@ -70,4 +70,27 @@ The project includes pgAdmin for database management:
 
 API endpoints will be available at http://localhost:3000/ when the server is running.
 
+### Available Endpoints
+
+#### Verify Order
+- **URL**: `/api/v1/orders/verify`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "quantity": 30,
+    "shippingAddress": {
+      "latitude": 40.7128,
+      "longitude": -74.0060
+    }
+  }
+  ```
+- **Response**: Order verification details including validity, pricing, and fulfillment plan
+
+#### Submit Order
+- **URL**: `/api/v1/orders`
+- **Method**: `POST`
+- **Request Body**: Same as verify order
+- **Response**: Order confirmation with order number, or validation error message
+
 ## Testing

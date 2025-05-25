@@ -33,3 +33,6 @@ prisma/.env
 
 # Requirements
 Requirements.md
+
+# Test Coverage
+coverage/
