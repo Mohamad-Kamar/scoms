@@ -1,5 +1,7 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import apiRoutes from "./api/routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./config/swagger";
 
 // Initialize Express app
 const app = express();
@@ -7,6 +9,9 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Swagger Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Register API routes
 app.use(apiRoutes);
@@ -21,21 +26,16 @@ app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
     message: "ScreenCloud Order Management System API",
     version: "1.0.0",
-    documentation: "/api-docs", // Will be implemented later
+    documentation: "/api-docs",
   });
 });
 
-// Error handling middleware
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+// Centralized error handling middleware
+app.use((err: Error, _req: Request, res: Response) => {
   console.error(err.stack);
-
   res.status(500).json({
     error: "Internal Server Error",
-    message:
-      process.env.NODE_ENV === "production"
-        ? "Something went wrong"
-        : err.message,
+    message: err.message || "An unexpected error occurred",
   });
 });
 
