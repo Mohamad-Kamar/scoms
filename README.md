@@ -48,6 +48,24 @@ Backend system for managing ScreenCloud device orders, warehouse inventory, and 
    npm start
    ```
 
+## Database Administration
+
+The project includes pgAdmin for database management:
+
+1. Access pgAdmin at http://localhost:5050
+2. Login with:
+   - Email: admin@example.com
+   - Password: admin
+3. To connect to the PostgreSQL instance:
+   - Right-click on "Servers" and select "Create" > "Server..."
+   - Name: SCOMS
+   - Connection tab:
+     - Host name/address: postgres (the Docker service name)
+     - Port: 5432
+     - Maintenance database: scoms
+     - Username: postgres
+     - Password: postgres
+
 ## API Documentation
 
 API endpoints will be available at http://localhost:3000/ when the server is running.
