@@ -142,7 +142,7 @@ describe("OrderService", () => {
       // Assertions
       expect(result.isValid).toBe(false);
       expect(result.invalidReason).toContain(
-        `Shipping cost exceeds ${SHIPPING.MAX_COST_PERCENTAGE}%`,
+        `Shipping cost exceeds maximum percentage of order value`,
       );
     });
 

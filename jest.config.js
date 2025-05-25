@@ -9,4 +9,8 @@ export default {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
+  setupFilesAfterEnv: ["<rootDir>/src/utils/jest.setup.ts"],
+  testTimeout: 10000, // Increase timeout for integration tests
+  verbose: true,
+  detectOpenHandles: true, // Help identify unfinished async operations
 };
