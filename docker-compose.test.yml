@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres_test:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: scoms_test
+    ports:
+      - "5433:5432"  # Different port than development to avoid conflicts
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  test:
+    build: .
+    depends_on:
+      - postgres_test
+    environment:
+      NODE_ENV: test
+      TEST_DATABASE_URL: postgresql://postgres:postgres@postgres_test:5432/scoms_test
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        npm test
+      "
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  postgres_test_data:
+    name: scoms_postgres_test_data
