@@ -1,7 +1,8 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import apiRoutes from "./api/routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger";
+import logger from "./utils/logger";
 
 // Initialize Express app
 const app = express();
@@ -31,8 +32,8 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 // Centralized error handling middleware
-app.use((err: Error, _req: Request, res: Response) => {
-  console.error(err.stack);
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  logger.error(`Error: ${err.message}\n${err.stack}`);
   res.status(500).json({
     error: "Internal Server Error",
     message: err.message || "An unexpected error occurred",
