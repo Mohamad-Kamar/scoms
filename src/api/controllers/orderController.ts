@@ -66,6 +66,7 @@ export class OrderController {
         data.shippingAddress,
       );
 
+      // First check if the order is valid
       if (!result.isValid) {
         res.status(422).json({
           error: "Invalid Order",

@@ -49,11 +49,11 @@
     "@types/swagger-ui-express": "^4.1.8",
     "express": "^5.1.0",
     "geolib": "^3.3.4",
-    "prisma": "^5.11.0",
+    "prisma": "^5.22.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ulid": "^2.4.0",
+    "winston": "^3.17.0",
     "zod": "^3.22.4"
-  },
-  "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
+  }
 }

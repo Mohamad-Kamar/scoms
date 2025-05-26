@@ -5,6 +5,7 @@ import { WarehouseRepository } from "../repositories/warehouseRepository";
 import { OrderRepository } from "../repositories/orderRepository";
 import { SHIPPING } from "../config/constants";
 import { OrderStatus } from "@prisma/client";
+import logger from "../utils/logger";
 
 export interface OrderVerificationResult {
   totalPrice: number;
@@ -77,6 +78,22 @@ export class OrderService {
       invalidReason = "Shipping cost exceeds maximum percentage of order value";
     }
 
+    // We'll keep these logs for development and production, but they'll be suppressed in tests
+    logger.debug(`Sufficient stock: ${sufficientStock}`);
+    logger.debug(`Shipping cost exceeds limit: ${shippingCostExceedsLimit}`);
+    logger.debug(`Invalid reason before return: ${invalidReason}`);
+
+    // Only use these additional logs when troubleshooting specific issues
+    if (process.env.DEBUG_VERBOSE === "true") {
+      logger.debug(`Base price: ${basePrice}`);
+      logger.debug(`Discounted price: ${discountedPrice}`);
+      logger.debug(`Total shipping cost: ${totalShippingCost}`);
+      logger.debug(`Sufficient stock: ${sufficientStock}`);
+      logger.debug(`Shipping cost exceeds limit: ${shippingCostExceedsLimit}`);
+      logger.debug(`Final isValid: ${isValid}`);
+      logger.debug(`Invalid reason: ${invalidReason}`);
+    }
+
     return {
       totalPrice: basePrice,
       discountPercentage,
@@ -131,7 +148,9 @@ export class OrderService {
         orderNumber,
       };
     } catch (error) {
-      console.error("Error submitting order:", error);
+      logger.error(
+        `Error submitting order: ${error instanceof Error ? error.message : String(error)}`,
+      );
       throw new Error("Failed to submit order");
     }
   }
