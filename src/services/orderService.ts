@@ -78,21 +78,19 @@ export class OrderService {
       invalidReason = "Shipping cost exceeds maximum percentage of order value";
     }
 
-    // We'll keep these logs for development and production, but they'll be suppressed in tests
+    // Debugging logs
     logger.debug(`Sufficient stock: ${sufficientStock}`);
     logger.debug(`Shipping cost exceeds limit: ${shippingCostExceedsLimit}`);
     logger.debug(`Invalid reason before return: ${invalidReason}`);
 
-    // Only use these additional logs when troubleshooting specific issues
-    if (process.env.DEBUG_VERBOSE === "true") {
-      logger.debug(`Base price: ${basePrice}`);
-      logger.debug(`Discounted price: ${discountedPrice}`);
-      logger.debug(`Total shipping cost: ${totalShippingCost}`);
-      logger.debug(`Sufficient stock: ${sufficientStock}`);
-      logger.debug(`Shipping cost exceeds limit: ${shippingCostExceedsLimit}`);
-      logger.debug(`Final isValid: ${isValid}`);
-      logger.debug(`Invalid reason: ${invalidReason}`);
-    }
+    // Additional debugging logs
+    logger.debug(`Base price: ${basePrice}`);
+    logger.debug(`Discounted price: ${discountedPrice}`);
+    logger.debug(`Total shipping cost: ${totalShippingCost}`);
+    logger.debug(`Sufficient stock: ${sufficientStock}`);
+    logger.debug(`Shipping cost exceeds limit: ${shippingCostExceedsLimit}`);
+    logger.debug(`Final isValid: ${isValid}`);
+    logger.debug(`Invalid reason: ${invalidReason}`);
 
     return {
       totalPrice: basePrice,

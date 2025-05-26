@@ -19,6 +19,10 @@ const options: swaggerJSDoc.Options = {
         url: "http://localhost:3000",
         description: "Development server",
       },
+      {
+        url: "https://api.example.com",
+        description: "Production server (Example)",
+      },
     ],
     tags: [
       {
@@ -26,8 +30,21 @@ const options: swaggerJSDoc.Options = {
         description:
           "Order management endpoints for verifying and submitting orders",
       },
+      {
+        name: "Warehouses",
+        description:
+          "Warehouse management endpoints for inventory and stock levels",
+      },
     ],
     components: {
+      securitySchemes: {
+        apiKeyAuth: {
+          type: "apiKey",
+          in: "header",
+          name: "X-API-KEY",
+          description: "API key for secure access to the API",
+        },
+      },
       schemas: {
         OrderVerifyRequest: {
           type: "object",

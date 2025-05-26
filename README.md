@@ -21,28 +21,40 @@ Backend system for managing ScreenCloud device orders, warehouse inventory, and 
 
 ## Setup
 
-1. **Install dependencies:**
+1. **Clone the repository:**
+   ```
+   git clone <repository-url>
+   cd scoms
+   ```
+
+2. **Install dependencies:**
    ```
    npm install
    ```
 
-2. **Start PostgreSQL database:**
+3. **Create environment file:**
+   ```
+   cp .env.example .env
+   ```
+   Note: The default configuration should work for local development.
+
+4. **Start PostgreSQL database:**
    ```
    docker-compose up -d
    ```
 
-3. **Set up the database:**
+5. **Set up the database:**
    ```
    npx prisma migrate dev
    npm run prisma:seed
    ```
 
-4. **Run the development server:**
+6. **Run the development server:**
    ```
    npm run dev
    ```
 
-5. **Build for production:**
+7. **Build for production:**
    ```
    npm run build
    npm start
@@ -66,13 +78,36 @@ The project includes pgAdmin for database management:
      - Username: postgres
      - Password: postgres
 
+## Testing
+
+The project includes comprehensive testing tools:
+
+```bash
+# Run all tests
+npm test
+
+# Run unit tests only (services, repositories, utils)
+npm run test:unit
+
+# Run integration tests only (API routes)
+npm run test:integration
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests in watch mode for development
+npm run test:watch
+```
+
 ## API Documentation
 
 API endpoints will be available at http://localhost:3000/ when the server is running.
 
+For full API documentation, access Swagger UI at http://localhost:3000/api-docs
+
 ### Available Endpoints
 
-#### Verify Order
+##### Verify Order
 - **URL**: `/api/v1/orders/verify`
 - **Method**: `POST`
 - **Request Body**:
@@ -87,11 +122,23 @@ API endpoints will be available at http://localhost:3000/ when the server is run
   ```
 - **Response**: Order verification details including validity, pricing, and fulfillment plan
 
-#### Submit Order
+##### Submit Order
 - **URL**: `/api/v1/orders`
 - **Method**: `POST`
 - **Request Body**: Same as verify order
 - **Response**: Order confirmation with order number, or validation error message
+
+#### Warehouse Endpoints
+
+##### Get All Warehouses
+- **URL**: `/api/v1/warehouses`
+- **Method**: `GET`
+- **Response**: List of all warehouses with stock levels
+
+##### Get Warehouse by ID
+- **URL**: `/api/v1/warehouses/{id}`
+- **Method**: `GET`
+- **Response**: Details for a specific warehouse
 
 ## Testing
 
