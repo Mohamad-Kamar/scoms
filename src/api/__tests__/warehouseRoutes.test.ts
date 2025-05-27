@@ -3,6 +3,7 @@ import request from "supertest";
 import app from "../../app";
 import prisma from "../../config/test-db";
 import { cleanupAllData, setupTestEnvironment } from "../../utils/test-simple";
+import { Warehouse } from "@prisma/client";
 
 describe("Warehouse API Tests", () => {
   // Test environment data
@@ -39,7 +40,7 @@ describe("Warehouse API Tests", () => {
       );
 
       // Check if all our test warehouses are included in the response
-      const responseIds = response.body.map((w: any) => w.id);
+      const responseIds = response.body.map((w: Warehouse) => w.id);
       for (const warehouse of testEnv.warehouses) {
         expect(responseIds).toContain(warehouse.id);
       }

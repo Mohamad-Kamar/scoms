@@ -32,6 +32,7 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 // Centralized error handling middleware
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.error(`Error: ${err.message}\n${err.stack}`);
   res.status(500).json({
