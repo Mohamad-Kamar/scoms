@@ -113,7 +113,7 @@ This document outlines the development plan for the ScreenCloud Order Management
 
 1.  **Cloud Deployment:**
     *   [ ] Deploy the application to a cloud provider (AWS, Azure, or GCP).
-    *   [ ] Set up CI/CD pipeline using GitHub Actions or similar service.
+    *   [x] Set up CI/CD pipeline using GitHub Actions or similar service.
     *   [ ] Configure production environment variables and secrets management.
     *   [ ] Implement automated database migrations in deployment pipeline.
 
