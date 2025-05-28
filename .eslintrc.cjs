@@ -8,16 +8,18 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'prettier'],
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module'
   },
   env: {
     node: true,
-    es6: true,
+    es2022: true,
     jest: true
   },
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', { 
+      endOfLine: 'auto' 
+    }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': ['error', { 
