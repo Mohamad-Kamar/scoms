@@ -1,12 +1,11 @@
 {
   "version": 2,
+  "buildCommand": "npm install -g typescript && npm run prisma:generate && npm run build:vercel",
+  "installCommand": "npm install --include=dev",
   "builds": [
     {
       "src": "api/server.js",
-      "use": "@vercel/node",
-      "build": "npm install -g typescript && npm run prisma:generate && npm run prisma:deploy && npm run build:vercel",
-      "install": "npm install --include=dev",
-      "outDir": "api"
+      "use": "@vercel/node"
     }
   ],
   "routes": [
