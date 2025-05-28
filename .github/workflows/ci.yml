@@ -35,8 +35,9 @@ jobs:
         run: npm run prisma:generate
       - name: Run Prisma migrations
         run: npm run prisma:deploy
-      - name: Seed database
-        run: npm run prisma:seed
+      # We don't need to seed the database since tests set up their own data
+      # - name: Seed database
+      #   run: npm run prisma:seed
       - name: Run linter
         run: npm run lint:fix
       - name: Run tests
