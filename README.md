@@ -23,7 +23,9 @@ Backend system for managing ScreenCloud device orders, warehouse inventory, and 
    ```
 3. **Set up the database and seed data:**
    ```bash
-   npx prisma migrate dev
+   npm run prisma:generate
+   npm run prisma:migrate
+   npm run prisma:deploy
    npm run prisma:seed
    ```
 4. **Run the server:**
