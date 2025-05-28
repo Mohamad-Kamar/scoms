@@ -36,14 +36,17 @@ const logFormat = format.combine(
 );
 
 // Define transport types based on environment
-const logTransports = [
-  new transports.Console(),
-  new transports.File({
-    filename: "logs/error.log",
-    level: "error",
-  }),
-  new transports.File({ filename: "logs/all.log" }),
-];
+const fileLogTransports =
+  process.env.HOSTING_ENV === "serverless"
+    ? []
+    : [
+        new transports.File({
+          filename: "logs/error.log",
+          level: "error",
+        }),
+        new transports.File({ filename: "logs/all.log" }),
+      ];
+const logTransports = [new transports.Console(), ...fileLogTransports];
 
 // Create the logger instance
 const logger = createLogger({
