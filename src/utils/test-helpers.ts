@@ -58,16 +58,10 @@ export const disconnectAndCleanup = async (
   }
 };
 
-// CommonJS for Jest
-module.exports = {
-  createTestWarehouse,
-  cleanupTestData,
-  setupTestEnvironment,
-};
-
-// ES Modules for TypeScript
+// Export as default for both ESM and Jest
 export default {
   createTestWarehouse,
   cleanupTestData,
   setupTestEnvironment,
+  disconnectAndCleanup,
 };

@@ -11,5 +11,4 @@ const prisma = new PrismaClient({
   log: ["error"],
 });
 
-module.exports = prisma;
 export default prisma;
